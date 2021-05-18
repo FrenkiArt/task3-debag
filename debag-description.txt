@@ -33,3 +33,33 @@
 Ошибка при высове модели Юзера - Исправил путь, убрал импорт.
 Исправлена строка 2 в файле ./middleware/validate-session.js
 
+Ошибка в выборе метода запроса POST - явно здесь должен быть запрос GET.
+Исправлена строка 30 в файле ./controllers/usercontroller.js
+
+?id=3&name=tom
+?full_name=111&username=222&passwordhash=333&email=sdfsdf@mail.ru
+?full_name=111&username=222&password=333&email=sdfsdf@mail.ru
+api/user/signup
+
+var xhr = new XMLHttpRequest();
+
+var json = JSON.stringify({
+  full_name: "arthur",
+  username: "arthur",
+	password: "arthur",
+	email: "sdfsdf@mail.ru"
+});
+
+xhr.open("POST", 'localhost:4000/api/user/signup', true)
+xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+
+xhr.onreadystatechange = function() {
+  if (this.readyState != 4) return;
+ 
+  console.log( this.responseText );
+}
+ 
+xhr.send(json);
+
+ 
+

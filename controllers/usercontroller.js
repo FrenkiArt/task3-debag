@@ -5,6 +5,7 @@ var jwt = require('jsonwebtoken');
 var User = require('../models/user');
 
 router.post('/signup', (req, res) => {
+  console.log(req);
   User.create({
     full_name: req.body.user.full_name,
     username: req.body.user.username,
@@ -27,7 +28,8 @@ router.post('/signup', (req, res) => {
   );
 });
 
-router.post('/signin', (req, res) => {
+router.get('/signin', (req, res) => {
+  console.log(req);
   User.findOne({where: {username: req.body.user.username}}).then((user) => {
     if (user) {
       bcryptjs.compare(
