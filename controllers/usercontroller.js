@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var bcrypt = require('bcrypt');
+var bcryptjs = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 var User = require('../db').import('../models/user');
 
@@ -8,7 +8,7 @@ router.post('/signup', (req, res) => {
   User.create({
     full_name: req.body.user.full_name,
     username: req.body.user.username,
-    passwordhash: bcrypt.hashSync(req.body.user.password, 10),
+    passwordhash: bcryptjs.hashSync(req.body.user.password, 10),
     email: req.body.user.email,
   }).then(
     function signupSuccess(user) {
@@ -30,7 +30,7 @@ router.post('/signup', (req, res) => {
 router.post('/signin', (req, res) => {
   User.findOne({where: {username: req.body.user.username}}).then((user) => {
     if (user) {
-      bcrypt.compare(
+      bcryptjs.compare(
         req.body.user.password,
         user.passwordHash,
         function (err, matches) {

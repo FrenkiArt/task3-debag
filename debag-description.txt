@@ -9,7 +9,9 @@
 Не определён роутер express.Router() - определил. Так же определил сам express.
 Исправлена строка 1 и 2 в файле ./controllers/usercontroller.js
 
-
+Ошибка в запросе require('bcrypt') - переименовал в require('bcryptjs'). 
+Так же переименовал саму переменную с bcrypt на bcryptjs.
+Исправлена строка 3, 11, 33 в файле ./controllers/usercontroller.js
 
 
  
