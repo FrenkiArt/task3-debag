@@ -13,5 +13,19 @@
 Так же переименовал саму переменную с bcrypt на bcryptjs.
 Исправлена строка 3, 11, 33 в файле ./controllers/usercontroller.js
 
+Ошибка при высове модели Юзера - Исправил путь, убрал импорт.
+Исправлена строка 5 в файле ./controllers/usercontroller.js
 
- 
+Ошибка при высове модели Game - Исправил путь, убрал импорт.
+Исправлена строка 2 в файле ./controllers/gamecontroller.js
+
+Ошибка, не прописан module.exports, - Добавил module.exports =.
+Исправлена строка 1 в файле ./models/game.js
+
+Ошибка при экспорте - переименовал с routers на router.
+Исправлена строка 112 в файле ./controllers/gamecontroller.js
+
+Ошибка вызова метода db.sync() - нет такого метода, но есть db.authenticate();
+Исправлена строка 7 в файле ./app.js
+так же добавлено module.exports = sequelize;
+в строке 18 в файле ./db.js
