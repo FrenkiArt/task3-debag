@@ -1,8 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var bcryptjs = require('bcryptjs');
-var jwt = require('jsonwebtoken');
-var User = require('../models/user');
+const express = require('express');
+
+const router = express.Router();
+const bcryptjs = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const User = require('../models/user');
 
 router.post('/signup', (req, res) => {
   console.log(req);
@@ -12,18 +13,18 @@ router.post('/signup', (req, res) => {
     passwordhash: bcryptjs.hashSync(req.body.user.password, 10),
     email: req.body.user.email,
   }).then(
-    function signupSuccess(user) {
-      let token = jwt.sign({id: user.id}, 'lets_play_sum_games_man', {
+    (user) => {
+      const token = jwt.sign({ id: user.id }, 'lets_play_sum_games_man', {
         expiresIn: 60 * 60 * 24,
       });
       console.log('пользователь создан', user);
       res.status(200).json({
-        user: user,
-        token: token,
+        user,
+        token,
       });
     },
 
-    function signupFail(err) {
+    (err) => {
       res.status(500).send(err.message);
     }
   );
@@ -31,28 +32,28 @@ router.post('/signup', (req, res) => {
 
 router.get('/signin', (req, res) => {
   console.log(req);
-  User.findOne({where: {username: req.body.user.username}}).then((user) => {
+  User.findOne({ where: { username: req.body.user.username } }).then((user) => {
     if (user) {
       bcryptjs.compare(
         req.body.user.password,
         user.passwordHash,
-        function (err, matches) {
+        (err, matches) => {
           if (matches) {
-            var token = jwt.sign({id: user.id}, 'lets_play_sum_games_man', {
+            const token = jwt.sign({ id: user.id }, 'lets_play_sum_games_man', {
               expiresIn: 60 * 60 * 24,
             });
             res.json({
-              user: user,
+              user,
               message: 'Successfully authenticated.',
               sessionToken: token,
             });
           } else {
-            res.status(502).send({error: 'Passwords do not match.'});
+            res.status(502).send({ error: 'Passwords do not match.' });
           }
         }
       );
     } else {
-      res.status(403).send({error: 'User not found.'});
+      res.status(403).send({ error: 'User not found.' });
     }
   });
 });

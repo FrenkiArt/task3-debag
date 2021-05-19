@@ -1,16 +1,17 @@
-var express = require('express');
-var app = express();
-var db = require('./db');
-var sequelize = require('./db');
-var user = require('./controllers/usercontroller');
-var game = require('./controllers/gamecontroller');
-var bodyParser = require('body-parser');
-var validateSession = require('./middleware/validate-session');
+const express = require('express');
+
+const app = express();
+const bodyParser = require('body-parser');
+const sequelize = require('./db');
+const user = require('./controllers/usercontroller');
+const game = require('./controllers/gamecontroller');
+const validateSession = require('./middleware/validate-session');
 
 sequelize
   .sync()
   .then((result) => {
     console.log('Связь с базой установлена');
+    console.log(result);
   })
   .catch((err) => console.log(err));
 
@@ -20,11 +21,11 @@ app.use('/api/auth', user);
 app.use(validateSession);
 app.use('/api/game', game);
 
-app.get('/', function (request, response) {
+app.get('/', (request, response) => {
   // отправляем ответ
   response.send('<h2>Сервер запущен</h2>');
 });
 
-app.listen(4000, function () {
+app.listen(4000, () => {
   console.log('App is listening on 4000');
 });

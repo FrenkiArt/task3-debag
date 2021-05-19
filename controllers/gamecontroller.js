@@ -1,35 +1,31 @@
-var router = require('express').Router();
-var Game = require('../models/game');
+const router = require('express').Router();
+const Game = require('../models/game');
 
 router.get('/all', (req, res) => {
-  Game.findAll({where: {owner_id: req.user.id}}).then(
-    function findSuccess(data) {
+  Game.findAll({ where: { owner_id: req.user.id } }).then(
+    (games) => {
       res.status(200).json({
-        games: games,
+        games,
         message: 'Data fetched.',
       });
     },
 
-    function findFail() {
-      res.status(500).json({
-        message: 'Data not found',
-      });
+    (err) => {
+      res.status(500).send(err.message);
     }
   );
 });
 
 router.get('/:id', (req, res) => {
-  Game.findOne({where: {id: req.params.id, owner_id: req.user.id}}).then(
-    function findSuccess(game) {
+  Game.findOne({ where: { id: req.params.id, owner_id: req.user.id } }).then(
+    (game) => {
       res.status(200).json({
-        game: game,
+        game,
       });
     },
 
-    function findFail(err) {
-      res.status(500).json({
-        message: 'Data not found.',
-      });
+    (err) => {
+      res.status(500).send(err.message);
     }
   );
 });
@@ -43,14 +39,14 @@ router.post('/create', (req, res) => {
     user_rating: req.body.game.user_rating,
     have_played: req.body.game.have_played,
   }).then(
-    function createSuccess(game) {
+    (game) => {
       res.status(200).json({
-        game: game,
+        game,
         message: 'Game created.',
       });
     },
 
-    function createFail(err) {
+    (err) => {
       res.status(500).send(err.message);
     }
   );
@@ -72,14 +68,14 @@ router.put('/update/:id', (req, res) => {
       },
     }
   ).then(
-    function updateSuccess(game) {
+    (game) => {
       res.status(200).json({
-        game: game,
+        game,
         message: 'Successfully updated.',
       });
     },
 
-    function updateFail(err) {
+    (err) => {
       res.status(500).json({
         message: err.message,
       });
@@ -94,14 +90,14 @@ router.delete('/remove/:id', (req, res) => {
       owner_id: req.user.id,
     },
   }).then(
-    function deleteSuccess(game) {
+    (game) => {
       res.status(200).json({
-        game: game,
+        game,
         message: 'Successfully deleted',
       });
     },
 
-    function deleteFail(err) {
+    (err) => {
       res.status(500).json({
         error: err.message,
       });
