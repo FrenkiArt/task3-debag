@@ -48,6 +48,9 @@
 Рефактор дал множество иных ошибок, описывать которые не имеет смысла.
 подключил линтер и преттье и всё исправил.
 
+Ошибка pg. - удалил pg  и заново установил, зарабоатло.
+исправлена строка 15 в файле ./package.json
+
 ?id=3&name=tom
 ?full_name=111&username=222&passwordhash=333&email=sdfsdf@mail.ru
 ?full_name=111&username=111&password=111&email=sdfsdf@mail.ru
