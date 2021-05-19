@@ -16,6 +16,7 @@ router.post('/signup', (req, res) => {
       let token = jwt.sign({id: user.id}, 'lets_play_sum_games_man', {
         expiresIn: 60 * 60 * 24,
       });
+      console.log('пользователь создан', user);
       res.status(200).json({
         user: user,
         token: token,

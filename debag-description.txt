@@ -25,7 +25,7 @@
 Ошибка при экспорте - переименовал с routers на router.
 Исправлена строка 112 в файле ./controllers/gamecontroller.js
 
-Ошибка вызова метода db.sync() - нет такого метода, но есть db.authenticate();
+Ошибка вызова метода db.sync() - нет такого метода, надо использовать sequelize.sync();
 Исправлена строка 7 в файле ./app.js
 так же добавлено module.exports = sequelize;
 в строке 18 в файле ./db.js
@@ -36,9 +36,17 @@
 Ошибка в выборе метода запроса POST - явно здесь должен быть запрос GET.
 Исправлена строка 30 в файле ./controllers/usercontroller.js
 
+Изменён вызов модуля body-parser
+Исправлена строка 12.
+Добавлена строка 7
+
+Изменён вызов модуля validate-session
+Исправлена строка 17.
+Добавлена строка 8
+
 ?id=3&name=tom
 ?full_name=111&username=222&passwordhash=333&email=sdfsdf@mail.ru
-?full_name=111&username=222&password=333&email=sdfsdf@mail.ru
+?full_name=111&username=111&password=111&email=sdfsdf@mail.ru
 api/user/signup
 
 var xhr = new XMLHttpRequest();
@@ -50,7 +58,7 @@ var json = JSON.stringify({
 	email: "sdfsdf@mail.ru"
 });
 
-xhr.open("POST", 'localhost:4000/api/user/signup', true)
+xhr.open("POST", 'localhost:4000/api/auth/signup', true)
 xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
 
 xhr.onreadystatechange = function() {
@@ -63,3 +71,22 @@ xhr.send(json);
 
  
 
+var xhr = new XMLHttpRequest();
+
+var json = JSON.stringify({
+  full_name: "arthur",
+  username: "arthur",
+	password: "arthur",
+	email: "sdfsdf@mail.ru"
+});
+
+xhr.open("GET", 'localhost:4000/api/auth/signin', true)
+xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+
+xhr.onreadystatechange = function() {
+  if (this.readyState != 4) return;
+ 
+  console.log( this.responseText );
+}
+ 
+xhr.send(json);

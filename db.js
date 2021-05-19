@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 require('dotenv').config();
+
 //database username   password
 //const sequelize = new Sequelize('gamedb', 'postgres', 'ghastb0i', {
 const sequelize = new Sequelize(

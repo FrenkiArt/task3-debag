@@ -1,6 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-  console.log('sequelize', sequelize);
-  console.log('DataTypes', DataTypes);
+  console.log('функция из user.js');
   return sequelize.define('user', {
     full_name: {
       type: DataTypes.STRING,
