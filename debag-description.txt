@@ -1,0 +1,99 @@
+<описание ошибки>. <описание исправления>. 
+Исправлена(ы) строка(и) <номер(а) строк> в файле <относительный путь к файлу 
+из корневой папки>
+
+Не указан порт для app.lister() - Добавил порт прослушивания 4000, как указано
+в последующей функции. 
+Исправлена строка 12 в файле ./app.js
+
+Не определён роутер express.Router() - определил. Так же определил сам express.
+Исправлена строка 1 и 2 в файле ./controllers/usercontroller.js
+
+Ошибка в запросе require('bcrypt') - переименовал в require('bcryptjs'). 
+Так же переименовал саму переменную с bcrypt на bcryptjs.
+Исправлена строка 3, 11, 33 в файле ./controllers/usercontroller.js
+
+Ошибка при высове модели Юзера - Исправил путь, убрал импорт.
+Исправлена строка 5 в файле ./controllers/usercontroller.js
+
+Ошибка при высове модели Game - Исправил путь, убрал импорт.
+Исправлена строка 2 в файле ./controllers/gamecontroller.js
+
+Ошибка, не прописан module.exports, - Добавил module.exports =.
+Исправлена строка 1 в файле ./models/game.js
+
+Ошибка при экспорте - переименовал с routers на router.
+Исправлена строка 112 в файле ./controllers/gamecontroller.js
+
+Ошибка вызова метода db.sync() - нет такого метода, надо использовать sequelize.sync();
+Исправлена строка 7 в файле ./app.js
+так же добавлено module.exports = sequelize;
+в строке 18 в файле ./db.js
+
+Ошибка при высове модели Юзера - Исправил путь, убрал импорт.
+Исправлена строка 2 в файле ./middleware/validate-session.js
+
+Ошибка в выборе метода запроса POST - явно здесь должен быть запрос GET.
+Исправлена строка 30 в файле ./controllers/usercontroller.js
+
+Изменён вызов модуля body-parser
+Исправлена строка 12.
+Добавлена строка 7
+
+Изменён вызов модуля validate-session
+Исправлена строка 17.
+Добавлена строка 8
+
+Рефактор в современный формат.
+Рефактор дал множество иных ошибок, описывать которые не имеет смысла.
+подключил линтер и преттье и всё исправил.
+
+Ошибка pg. - удалил pg  и заново установил, зарабоатло.
+исправлена строка 15 в файле ./package.json
+
+?id=3&name=tom
+?full_name=111&username=222&passwordhash=333&email=sdfsdf@mail.ru
+?full_name=111&username=111&password=111&email=sdfsdf@mail.ru
+api/user/signup
+
+var xhr = new XMLHttpRequest();
+
+var json = JSON.stringify({
+  full_name: "arthur",
+  username: "arthur",
+	password: "arthur",
+	email: "sdfsdf@mail.ru"
+});
+
+xhr.open("POST", 'localhost:4000/api/auth/signup', true)
+xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+
+xhr.onreadystatechange = function() {
+  if (this.readyState != 4) return;
+ 
+  console.log( this.responseText );
+}
+ 
+xhr.send(json);
+
+ 
+
+var xhr = new XMLHttpRequest();
+
+var json = JSON.stringify({
+  full_name: "arthur",
+  username: "arthur",
+	password: "arthur",
+	email: "sdfsdf@mail.ru"
+});
+
+xhr.open("GET", 'localhost:4000/api/auth/signin', true)
+xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+
+xhr.onreadystatechange = function() {
+  if (this.readyState != 4) return;
+ 
+  console.log( this.responseText );
+}
+ 
+xhr.send(json);
